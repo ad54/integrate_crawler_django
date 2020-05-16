@@ -33,7 +33,7 @@ def handle_request(request):
         if job_status == 'finished':
 
             # database connection
-            con = pymysql.connect(host="localhost", user="root", passwd="Arihant", db="quotes_scrape",
+            con = pymysql.connect(host="localhost", user="root", passwd="", db="quotes_scrape",
                                   cursorclass=pymysql.cursors.DictCursor)
             cursor = con.cursor()
             # get records from database of particular database

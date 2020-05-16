@@ -23,6 +23,7 @@ class QuotesCrawlerSpider(scrapy.Spider):
             print('during job id : ',e)
 
     def parse(self, response):
+        """extract divisions and iterate over it"""
         for div in response.xpath('//div[@class="quote"]'):
             item = QuotesScrapeItem()
             item['job_id'] = self.job_id

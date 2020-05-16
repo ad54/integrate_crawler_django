@@ -1,10 +1,15 @@
-Hello Geeks,
+Hello Guys,
 
-In this tutorial We are going to learn **'To integrate crawler developed in scrapy with django'**.
 
-We are going to make an app which take keyword from user and extract the quote related to that keyword from  [this site] (http://quotes.toscrape.com/).
+In this tutorial We are going to learn **How To integrate crawler developed in scrapy with django**.
 
-First We are going to make a crawer in scrapy. That will extract data and store it in database. The database used is MySQL.  If you don't have idea about scrapy crawler please visit here ('http://')
+- Crawler (backend) : scrapy
+- Frontend : django
+- database : MySQl
+
+We are going to make an app which takes keyword from user and extract the quotes related to that keyword from  [this site](http://quotes.toscrape.com/).
+
+First We are going to make a crawer in scrapy. That will extract data and store it in database. The database used is MySQL.  If you don't have idea about scrapy crawler please visit here https://docs.scrapy.org/en/latest/intro/tutorial.html
 
 Now We will make a django project using command. 
 ```
@@ -17,6 +22,17 @@ python manage.py startapp request_handler
 ```
 
 add name of the app  'request_handler' in list 'INSTALLED_APPS' in settings.py.
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'request_handler'
+]
+```
 
 go to views.py file in directory named 'request_handler'. Create one view for inserting keyword. For that we will create an html file (template) and render the same
 
@@ -24,7 +40,8 @@ go to views.py file in directory named 'request_handler'. Create one view for in
 def home(request):
     return render(request, "index.html")
 ```
-Now we will create second view for handling the request and getting data and send json response
+Now we will create second view for handling the request and getting data and send json response.
+We pass keyword from django to scrapy. We set job_id , use the same job_id in scrapy for identify request and  use the same job_id in django for getting data from database.
 
 ```
 def handle_request(request):
@@ -66,7 +83,7 @@ def handle_request(request):
 ```
 
 So for deploying our crawler we will use 'scrapyd'
-for installation you can refer [https://scrapyd.readthedocs.io/en/stable/install.html#installing-scrapyd-generic-way] (https://scrapyd.readthedocs.io/en/stable/install.html#installing-scrapyd-generic-way)
+for installation you can refer [https://scrapyd.readthedocs.io/en/stable/install.html#installing-scrapyd-generic-way](https://scrapyd.readthedocs.io/en/stable/install.html#installing-scrapyd-generic-way)
 
 ```
 pip install scrapyd
@@ -87,7 +104,7 @@ start scrapyd using command
 ```
 start scrapyd
 ```
-You can check in browser by going to :  http://localhost:6800/
+You can check in browser by going to :  _http://localhost:6800/_
 
 deploy spider, you need write the name whatever in config file with deploy for e.g [deploy:local]
 
@@ -97,10 +114,10 @@ scrapyd-deply local
 
 go to home page and enter keyword
 
-![home page]()
+![home page](https://github.com/ad54/integrate_crawler_django/blob/master/screenshot/home_page.png)
 
 after crawling complete you will get result in json format
-![result page]()
+![result page](https://github.com/ad54/integrate_crawler_django/blob/master/screenshot/result_page.png)
 
 
 Thank you,
